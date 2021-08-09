@@ -1,0 +1,14 @@
+language: python
+python:
+- '3.8'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: 3QW3aoji0obFPNzH/hYewehaKGLhqiRtcJpC0ZKoPaNh/X4N84dfn552up2buRlAjhPWFYns4jLQiuapS+wkbkyKyIVl3K34OwkVf2Hxpkzq3/iYg3hUU2j1Hm9w4+zBqPPUsyRkY6nN4F8UTy2YRxvlqBOUxAM5b06F+oU95Y8/qulTMUHE0n3K7Asp1KDxIfD0/KK6Id0gh/uTZ27UtemcMNpeCAimMogkkA7CCu1f+YuoOTgZXsXxt9apY2pAZyUIZubyOGbKz8nDq/NDvBK5doCbyJQX2ox0Z5CQz1PSLp6N9zidLkRkOTOqJDwweOxMwSXCfc3J92sxKwjeHzEgPfX8kcFGtGFKGd9X5ssJkPagCjhtPueFKBGs4pDpdDszA9F2acGp+UUf578QLmRS/qJgd5v8fiGnbphY9zuj9zhNcJAJR2zaoHOiaO56NEKa98hrDH0nY8I5DYI3RB/6Gf428gp+bY9VkJ6zjx1iOU0VdRdBEY5JxsTU0EErlWRHP67KCgg39+woY4kaVR+nGQjhVdV9l8NFnk0XeLGb7bn+SQxXcfJ/cHJHCaeU+QLHsZk2MrxElJKYlRa/9mgmjE1gNXjQErbmxC5a3/yenMtPj03pzARy49l1B6Dlth+MIqjbKpULIfEG6XJg4Hj8lT0J3iY4qVvYOyiwRwA=
+  app: studybuddy1-42
+  on:
+    repo: uva-cs3240-f20/project-1-42

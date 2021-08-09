@@ -1,0 +1,45 @@
+{% load socialaccount %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<html>
+  <head>
+    <title>Study Buddy Request</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        background-color: lightsteelblue;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="jumbotron" style="background-color:#3AAFA9">
+        <h1 class="display-4" style="color:#FeFFFF">Welcome to StudyBuddy!</h1>
+  </div>
+
+
+  <div>
+    <ul class="nav nav-tabs" style="background-color:#2B7A78">
+        <li class="nav-item">
+            <a class="nav-link" style="color:#FeFFFF" href="{% url 'profile' %}">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#FeFFFF" href="{% url 'requestSB' %}">Request Study Buddy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#FeFFFF" href="{% url 'users' %}">All Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#17252A; background-color: #3AAFA9;" href="{% url 'courses' %}">Courses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#FeFFFF" href="{% url 'groups' pk=user.id %}">Groups</a>
+        </li>
+    </ul>
+  </div>

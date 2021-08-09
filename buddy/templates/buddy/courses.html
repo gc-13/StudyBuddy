@@ -1,0 +1,88 @@
+{% load socialaccount %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<html>
+  <head>
+    <title>Study Buddy Request</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        background-color: lightsteelblue;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div>
+      <div class="jumbotron jumbotron-fluid" style="background-color:#011d7a; text-align: center; padding-top: 2%; padding-bottom: 2%">
+        <div class="container">
+          <h1 class="display-2" style="color:#FeFFFF">StudyBuddy</h1>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-expand-md" style="background-color:#011d7a">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul class="navbar-nav mr-auto" style="background-color:#011d7a">
+              <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF" href="{% url 'profile' %}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#FeFFFF" href="{% url 'groups' pk=user.id %}">My Groups</a>
+            </li>
+              <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF" href="{% url 'requestSB' %}">Open Requests</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF" href="{% url 'users' %}">Potential Buddies</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF; background-color: #2b3c72;" href="{% url 'courses' %}">Courses</a>
+              </li>
+            </ul>
+          </div>
+          <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto" style="background-color:#011d7a">
+              <li class="nav-item">
+                <a class="nav-link" style="color:#FeFFFF;" href="{% url 'editprofile' pk=user.id %}">Edit Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#FeFFFF;" href="{% url 'studyrequestform' %}">Create Request</a>
+          </li>
+          </ul>
+        </div>
+    </div>
+
+
+            <h2 style="text-align: left"><span class="badge badge-primary badge-pill" style="background-color:#2b3c72">Courses</span></h2>
+
+    <div class="container-fluid">
+      <h5><strong>Departments</strong></h5>
+      <div class="col-md-6">
+      {% for subject in subject_list %}
+        <div>
+        <div>
+          <button class="btn btn-secondary" style="text-align: left" type="button" data-toggle="collapse" data-target="#{{ subject }}" aria-expanded="false" aria-controls="collapseExample">
+            {{ subject }}
+          </button>
+      </div>
+      <div class="collapse" id="{{ subject }}">
+        {% for course in course_data %}
+          {% if subject == course.subject %}
+        <span class="badge badge-primary badge-pill" style="background-color:#2b3c72">  <a href="{% url 'course' id=course.id%}">  {{ course.subject }} {{ course.catalog_number }}</a></span>
+          {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+
+
+</body>
+</html>

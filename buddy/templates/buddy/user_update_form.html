@@ -1,0 +1,109 @@
+{% load socialaccount %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load crispy_forms_tags %}
+<html>
+  <head>
+    <title>User Edit Profile Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        background-color: lightsteelblue;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div>
+        <div class="jumbotron jumbotron-fluid" style="background-color:#011d7a; text-align: center; padding-top: 2%; padding-bottom: 2%">
+          <div class="container">
+            <h1 class="display-2" style="color:#FeFFFF">StudyBuddy</h1>
+          </div>
+        </div>
+
+        <nav class="navbar navbar-expand-md" style="background-color:#011d7a">
+          <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto" style="background-color:#011d7a">
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#FeFFFF" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF" href="{% url 'groups' pk=user.id %}">My Groups</a>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#FeFFFF" href="{% url 'requestSB' %}">Open Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#FeFFFF" href="{% url 'users' %}">Potential Buddies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#FeFFFF" href="{% url 'courses' %}">Courses</a>
+                </li>
+              </ul>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+              <ul class="navbar-nav ml-auto" style="background-color:#011d7a">
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#FeFFFF; background-color: #2b3c72;" href="{% url 'editprofile' pk=user.id %}">Edit Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#FeFFFF;" href="{% url 'studyrequestform' %}">Create Request</a>
+            </li>
+            </ul>
+          </div>
+      </div>
+
+    <div class = "container-fluid" style="padding-left: 5%; padding-top: 1%">
+        <div class = "row" style= "align-items: left">
+
+    <div>
+        <h3><strong>Update Personal Information</strong></h3>
+        <h5>Please input your first major and class year, a brief description of yourself,
+            and 3 study buddy strengths of yours!</h5>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+
+
+
+  <div class="col-md-4">
+      <h3><strong>Update Course Information</strong></h3>
+
+        <div>
+            <h5>Add courses to your current schedule.</h5>
+            <form action="{% url 'addcourse' user.id %}" method="post">
+            {% csrf_token %}
+            <h6>Subject, example: "CS"</h6>
+            <input type="text" style="border-radius: 5px" name="subject" id="subject">
+            <h6>Course Number, example: "3240"</h6>
+            <input type="text" style="border-radius: 5px" name="catalog_number" id="catalog_number">
+            <div style = "padding-top: 5px">
+            <input class="btn btn-primary btn-secondary" style="display:inline-block; float" type="submit" value="Add Course">
+            </div>
+            </form>
+        </div>
+
+        <div>
+            <h4>Remove a course?</h4>
+            <form action="{% url 'removecourse' user.id %}" method="post">
+            {% csrf_token %}
+            {% for course in user.courses.all %}
+                <input type="checkbox" name="course" id="{{ course.id }}" value="{{ course.id }}">
+                <label>{{ course.subject }} {{ course.catalog_number }}</label>
+            {% endfor %}
+                <div>
+            <input class="btn btn-primary btn-secondary" style="display:inline-block" type="submit" value="Remove Course" >
+        </div>
+            </form>
+        </div>
+  </div>
+        </div>
+
+    </div>
+  </body>
